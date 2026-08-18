@@ -47,17 +47,18 @@ export const infoEmbed = (title, message) =>
 export const nowPlayingEmbed = (track, queue) => {
   const requestedBy = track.requestedBy?.tag || track.requestedBy?.username || "alguien";
   const queueSize = queue.tracks?.size ?? queue.tracks?.length ?? 0;
-  return baseEmbed(COLORS.violet)
+  const embed = baseEmbed(COLORS.violet)
     .setAuthor({ name: "MelodyWave está reproduciendo" })
     .setTitle(truncate(track.title || "Canción sin título", 150))
     .setURL(track.url)
     .setDescription(track.author ? `**${truncate(track.author, 100)}**` : "Fuente desconocida")
-    .setThumbnail(track.thumbnail || null)
     .addFields(
       { name: "Duración", value: duration(track.durationMS ? track.durationMS / 1000 : track.duration), inline: true },
       { name: "Solicitada por", value: requestedBy, inline: true },
       { name: "En cola", value: String(queueSize), inline: true },
     );
+  if (track.thumbnail) embed.setThumbnail(track.thumbnail);
+  return embed;
 };
 
 export const controlsRow = (isPaused = false) =>
@@ -102,7 +103,7 @@ export const searchResultEmbed = (query, tracks) =>
 
 export const searchButtons = (token, tracks) =>
   new ActionRowBuilder().addComponents(
-    tracks.slice(0, 5).map((_, index) =>
+    ...tracks.slice(0, 5).map((_, index) =>
       new ButtonBuilder()
         .setCustomId(`music:pick:${token}:${index}`)
         .setLabel(`${index + 1}`)

@@ -6,7 +6,7 @@ import {
   PermissionsBitField,
 } from "discord.js";
 import { Player } from "discord-player";
-import { YoutubeExtractor, SoundCloudExtractor } from "@discord-player/extractor";
+import { DefaultExtractors } from "@discord-player/extractor";
 import { config } from "./config.js";
 import { commandDefinitions, registerCommands } from "./commands.js";
 import {
@@ -33,8 +33,6 @@ const client = new Client({
 });
 const player = new Player(client);
 const music = createMusicService(player);
-const pendingMessages = new Map();
-
 const respond = async (interaction, payload) => {
   if (interaction.deferred || interaction.replied) return interaction.editReply(payload);
   return interaction.reply(payload);
@@ -247,8 +245,7 @@ server.listen(config.port, "0.0.0.0", () => {
   console.info(`Healthcheck disponible en el puerto ${config.port}`);
 });
 
-await player.extractors.register(YoutubeExtractor, {});
-await player.extractors.register(SoundCloudExtractor, {});
+await player.extractors.loadMulti(DefaultExtractors);
 await client.login(config.token);
 
 const shutdown = async (signal) => {

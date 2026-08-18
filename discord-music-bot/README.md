@@ -31,7 +31,7 @@ pnpm --filter @workspace/discord-music-bot start
 
 ## Railway
 
-Configura el proyecto para desplegar desde este repositorio. Railway usará `discord-music-bot/Dockerfile` y `discord-music-bot/railway.json`.
+Configura el proyecto para desplegar desde este repositorio. Railway usará `discord-music-bot/Dockerfile` y el `railway.json` de la raíz.
 
 Variables requeridas:
 
