@@ -1,0 +1,1 @@
+- [Discord Player extractors](discord-player-extractors.md) — Discord Player 7.x handles YouTube internally; load optional providers through DefaultExtractors.
