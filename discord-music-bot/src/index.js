@@ -213,9 +213,12 @@ player.events.on("emptyQueue", async (queue) => {
   await announce(queue, { embeds: [infoEmbed("Cola terminada", "No quedan canciones. Puedes usar `/play` para continuar.")] });
 });
 
-client.once("ready", async (readyClient) => {
+client.once("clientReady", async (readyClient) => {
   console.info(`Conectado como ${readyClient.user.tag}`);
-  await registerCommands(config);
+  await registerCommands({
+    ...config,
+    clientId: config.clientId || readyClient.application.id,
+  });
 });
 
 client.on("interactionCreate", async (interaction) => {

@@ -36,7 +36,7 @@ Configura el proyecto para desplegar desde este repositorio. Railway usará `dis
 Variables requeridas:
 
 - `DISCORD_TOKEN`
-- `DISCORD_CLIENT_ID`
+- `DISCORD_CLIENT_ID` (opcional; el bot puede obtenerlo automáticamente después de iniciar sesión)
 
 Variables opcionales:
 

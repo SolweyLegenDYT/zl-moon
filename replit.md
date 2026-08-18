@@ -45,7 +45,7 @@ _Populate as you build — explicit user instructions worth remembering across s
 
 ## Gotchas
 
-- `DISCORD_CLIENT_ID` es obligatorio para registrar los comandos.
+- `DISCORD_CLIENT_ID` es opcional; si se omite, se obtiene automáticamente después del login.
 - `DISCORD_GUILD_ID` es recomendable durante el desarrollo para que los comandos aparezcan casi al instante.
 - Los tokens se configuran como secretos de entorno; nunca se guardan en Git.
 
