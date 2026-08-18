@@ -11,6 +11,27 @@ env = { "CI" = "true" }
 [workflows]
 runButton = "Project"
 
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "MelodyWave Discord Bot"
+
+[[workflows.workflow]]
+name = "MelodyWave Discord Bot"
+author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "console"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "PORT=8099 pnpm --filter @workspace/discord-music-bot start"
+waitForPort = 8099
+
 [agent]
 stack = "PNPM_WORKSPACE"
 expertMode = true
