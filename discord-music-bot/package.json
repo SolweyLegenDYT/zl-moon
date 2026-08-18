@@ -1,0 +1,21 @@
+{
+  "name": "@workspace/discord-music-bot",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Bot de música para Discord con búsqueda, cola y controles interactivos.",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
+    "check": "node --check src/index.js && node --check src/music.js && node --check src/ui.js && node --check src/commands.js"
+  },
+  "dependencies": {
+    "@discord-player/extractor": "^7.1.0",
+    "discord-player": "^7.1.0",
+    "discord.js": "^14.25.1",
+    "dotenv": "^16.6.1",
+    "ffmpeg-static": "^5.2.0",
+    "mediaplex": "^1.0.0",
+    "yt-search": "^2.13.1"
+  }
+}

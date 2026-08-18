@@ -1,10 +1,12 @@
-# [Project name]
+# MelodyWave Discord Music Bot
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Bot de música para Discord con búsqueda, reproducción, cola y controles interactivos con botones, preparado para Railway.
 
 ## Run & Operate
 
 - `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- `pnpm --filter @workspace/discord-music-bot start` — run the Discord music bot
+- `pnpm --filter @workspace/discord-music-bot check` — validate bot JavaScript syntax
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
@@ -22,15 +24,20 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `discord-music-bot/src/` — comandos, UI de embeds/botones, búsqueda y reproducción
+- `discord-music-bot/README.md` — configuración de Discord, Railway y descripción del repositorio
+- `discord-music-bot/Dockerfile` — imagen Railway con FFmpeg
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- La reproducción usa Discord Player con extractores de YouTube y SoundCloud.
+- La búsqueda por texto tiene un respaldo con `yt-search` para resolver consultas ambiguas.
+- La cola vive en memoria por servidor; no se necesita base de datos para operar el bot.
+- El healthcheck HTTP permite que Railway supervise el proceso aunque la funcionalidad principal sea un bot de Discord.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+MelodyWave ofrece una experiencia musical dentro de Discord: slash commands para buscar y reproducir, embeds coloridos, botones para controlar la sesión y mensajes claros cuando una fuente no responde.
 
 ## User preferences
 
@@ -38,7 +45,9 @@ _Populate as you build — explicit user instructions worth remembering across s
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- `DISCORD_CLIENT_ID` es obligatorio para registrar los comandos.
+- `DISCORD_GUILD_ID` es recomendable durante el desarrollo para que los comandos aparezcan casi al instante.
+- Los tokens se configuran como secretos de entorno; nunca se guardan en Git.
 
 ## Pointers
 
