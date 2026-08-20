@@ -19,6 +19,7 @@ const truncate = (value, length = 90) =>
   value.length > length ? `${value.slice(0, length - 1)}…` : value;
 
 const duration = (seconds) => {
+  if (typeof seconds === "string") return seconds || "En directo";
   if (!Number.isFinite(seconds) || seconds <= 0) return "En directo";
   const total = Math.floor(seconds);
   const minutes = Math.floor(total / 60);
@@ -114,7 +115,8 @@ export const searchButtons = (token, tracks) =>
 
 export const queueEmbed = (queue) => {
   const current = queue.currentTrack;
-  const upcoming = [...(queue.tracks?.toArray?.() || [])].slice(0, 10);
+  const tracks = Array.isArray(queue.tracks) ? queue.tracks : queue.tracks?.toArray?.() || [];
+  const upcoming = tracks.slice(0, 10);
   const lines = upcoming.length
     ? upcoming.map((track, index) => `**${index + 1}.** ${truncate(track.title || "Sin título", 68)}`).join("\n")
     : "No hay más canciones esperando.";

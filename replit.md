@@ -30,8 +30,8 @@ Bot de música para Discord con búsqueda, reproducción, cola y controles inter
 
 ## Architecture decisions
 
-- La reproducción usa Discord Player con extractores de YouTube y SoundCloud.
-- La búsqueda por texto tiene un respaldo con `yt-search` para resolver consultas ambiguas.
+- La reproducción usa `yt-dlp` con FFmpeg y el reproductor de voz oficial de Discord.
+- La búsqueda por texto usa `yt-search` y el audio de YouTube se obtiene con el cliente Android para evitar bloqueos del cliente web.
 - La cola vive en memoria por servidor; no se necesita base de datos para operar el bot.
 - El healthcheck HTTP permite que Railway supervise el proceso aunque la funcionalidad principal sea un bot de Discord.
 
